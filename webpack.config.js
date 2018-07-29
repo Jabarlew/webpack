@@ -25,7 +25,11 @@ module.exports = {
 
   // Input source files -> Output distribution files
   context: dir.src,
-  entry: './index.js',
+  entry: [
+    'babel-polyfill',
+    'whatwg-fetch',
+    './index.js',
+  ],
   output: {
     publicPath: '/',
     filename: 'assets/[name].js',

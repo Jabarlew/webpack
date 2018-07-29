@@ -1,1 +1,3 @@
-const a = 5;
+import add from './test';
+
+console.log(add(2, 5));
