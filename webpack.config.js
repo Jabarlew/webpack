@@ -1,8 +1,8 @@
-
 'use strict';
 
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const CaseSensitivePathsWebpackPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -14,7 +14,7 @@ const dir = {
 };
 
 const styleBundle = new ExtractTextWebpackPlugin({
-  filename: `assets/[name].css`,
+  filename: 'assets/[name].css',
   disable: true,
 });
 
@@ -25,13 +25,10 @@ module.exports = {
 
   // Input source files -> Output distribution files
   context: dir.src,
-  entry: [
-    'babel-polyfill',
-    './index.js',
-  ],
+  entry: './index.js',
   output: {
-    filename: 'assets/[name].js',
     publicPath: '/',
+    filename: 'assets/[name].js',
   },
 
   module: {
@@ -86,8 +83,10 @@ module.exports = {
     styleBundle, // CSS shit
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // Makes a popular date library WAY smaller
     new webpack.NamedModulesPlugin(), // I forget but I had good reason to add this
-    new webpack.HotModuleReplacementPlugin(), // "Hot" reloading on save (let me know if you want to disable this)
-    new CaseSensitivePathsWebpackPlugin(), // Makes it so it errors if you `import foo from './foo';` then `import foo from './Foo';`
+    // "Hot" reloading on save (let me know if you want to disable this)
+    new webpack.HotModuleReplacementPlugin(),
+    // Makes it so it errors if you `import foo from './foo';` then `import foo from './Foo';`
+    new CaseSensitivePathsWebpackPlugin(),
     // Makes HTML page
     new HtmlWebpackPlugin({
       inject: true,
@@ -98,7 +97,6 @@ module.exports = {
 
   // HTTP server configuration
   devServer: {
-    host: '0.0.0.0',
     publicPath: '/',
     inline: true,
     hot: true,

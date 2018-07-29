@@ -5,8 +5,8 @@ module.exports = {
   extends: 'airbnb',
   parserOptions: { sourceType: 'script' },
   env: { es6: true },
-  settings: {
-    'import/resolver': { 'babel-module': {} },
+  rules: {
+    strict: ['error', 'global'],
   },
   overrides: [
     {
